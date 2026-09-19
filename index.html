@@ -1,16 +1,69 @@
 <!doctype html>
-<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>BEYZA</title>
-<style>html,body{margin:0;background:#07050b;color:#fff;font-family:system-ui;height:100%}#loading{height:100%;display:grid;place-items:center;text-align:center;padding:24px;box-sizing:border-box}.sub{opacity:.65;font-size:13px;margin-top:8px}</style></head>
-<body><div id="loading"><div><b>BEYZA</b><div class="sub">Hikâye yükleniyor…</div></div></div>
-<script src="assets/00.js"></script><script src="assets/01.js"></script><script src="assets/02_06.js"></script>
-<script src="bundles/00.js"></script>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BEYZA</title>
+<style>
+:root{--panel:rgba(10,7,15,.78);--line:rgba(255,255,255,.16);--gold1:#f5d7a3;--gold2:#c98d50}
+*{box-sizing:border-box}html,body{margin:0;background:#050407;color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+body{min-height:100svh;display:grid;place-items:start center}
+#app{position:relative;width:min(100vw,430px);height:100svh;min-height:650px;background:#000;overflow:hidden}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .35s ease}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 46%,rgba(0,0,0,.72) 100%);pointer-events:none}
+.hidden{display:none!important}.hotspot{position:absolute;z-index:20;border:0;background:transparent;opacity:0;cursor:pointer}
+#start{left:20%;right:20%;top:60%;height:8%}
+.top{position:absolute;z-index:8;left:14px;right:14px;top:max(14px,env(safe-area-inset-top));display:flex;justify-content:space-between;gap:10px;text-shadow:0 2px 12px #000}
+.top small{font-size:10px;letter-spacing:.12em}.pill{font-size:11px;background:rgba(0,0,0,.45);border:1px solid var(--line);padding:6px 9px;border-radius:999px}
+.caption{position:absolute;z-index:9;left:14px;right:14px;bottom:max(16px,env(safe-area-inset-bottom));padding:13px 15px;border-radius:17px;background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(10px);font-size:14px;line-height:1.45}
+.choice{position:absolute;z-index:12;left:14px;right:14px;bottom:max(16px,env(safe-area-inset-bottom));padding:16px;border-radius:20px;background:rgba(11,8,16,.9);border:1px solid var(--line);backdrop-filter:blur(12px)}
+.choice h2{font-size:18px;line-height:1.35;margin:0 0 12px}.opts{display:grid;gap:9px}
+.btn{min-height:50px;border-radius:15px;border:1px solid var(--line);font:inherit;font-weight:750;padding:10px 13px}
+.btn.primary{background:linear-gradient(135deg,var(--gold1),var(--gold2));color:#25170e}.btn.secondary{background:rgba(255,255,255,.08);color:#fff}
+#menuNote{position:absolute;z-index:9;bottom:15px;left:50%;transform:translateX(-50%);font-size:10px;opacity:.65;white-space:nowrap}
+</style>
+</head>
+<body>
+<div id="app">
+<img id="bg" class="bg" alt="">
+<div id="shade" class="shade hidden"></div>
+<div id="top" class="top hidden"><div><small>BÖLÜM 1 · 12 EYLÜL 2026</small><div style="font-size:12px;margin-top:3px">JW Marriott Ankara · Arem Arman Konseri</div></div><div id="pill" class="pill">1 / 20</div></div>
+<div id="caption" class="caption hidden"></div>
+<div id="choice" class="choice hidden"><h2 id="q"></h2><div id="opts" class="opts"></div></div>
+<button id="start" class="hotspot" aria-label="Yeni Oyun"></button>
+<div id="menuNote">Yeni Oyun alanına dokun</div>
+</div>
+
+<script src="assets/00.js"></script><script>window.B0=window.__BEYZA_ASSETS__[0]</script>
+<script src="assets/01.js"></script><script>window.B1=window.__BEYZA_ASSETS__[1]</script>
+<script src="assets/02.js"></script><script>window.B2=window.__BEYZA_ASSETS__[2]</script>
+<script src="assets/02_06.js"></script><script>window.B3=window.__BEYZA_ASSETS__[2]</script>
+<script src="assets/03.js"></script><script>window.B4=window.__BEYZA_ASSETS__[3]</script>
+<script src="assets/a1.js"></script><script>window.B5=window.__BEYZA_ASSETS__[3]</script>
+<script src="assets/04.js"></script><script>window.B6=window.__BEYZA_ASSETS__[4]</script>
+<script src="assets/05.js"></script><script>window.B7=window.__BEYZA_ASSETS__[5]</script>
+<script src="assets/05_06.js"></script><script>window.B8=window.__BEYZA_ASSETS__[5]</script>
+<script src="assets/a0.js"></script><script>window.B9=window.__BEYZA_ASSETS__[0]</script>
+<script src="bundles/00.js"></script><script>window.B10=window.__BEYZA_ASSETS__[0]</script>
+
 <script>
-(()=>{try{
- const a=window.__BEYZA_ASSETS__||[];
- if(!a.length) throw new Error("asset bundle");
- const loader=document.getElementById("loading");
- loader.innerHTML='<div><b>BEYZA</b><div class="sub">Sahne dosyaları hazırlanıyor…</div></div>';
- window.dispatchEvent(new Event("beyza-assets-ready"));
- setTimeout(()=>{if(document.getElementById("loading")) loader.innerHTML='<div><b>BEYZA</b><div class="sub">Oyun paketi eksik. Dağıtım onarımı sürüyor.</div></div>'},4000);
-}catch(e){document.getElementById("loading").textContent="Oyun yüklenemedi.";console.error(e)}})();
-</script></body></html>
+(()=>{
+const I=[B0,B1,B2,B3,B4,B5,B6,B7,B8,B9,B10];
+const bg=document.getElementById('bg'),shade=document.getElementById('shade'),topbar=document.getElementById('top'),cap=document.getElementById('caption'),pill=document.getElementById('pill'),choice=document.getElementById('choice'),q=document.getElementById('q'),opts=document.getElementById('opts'),start=document.getElementById('start'),menuNote=document.getElementById('menuNote');
+let timers=[]; const later=(f,m)=>{const t=setTimeout(f,m);timers.push(t)}; const clear=()=>{timers.forEach(clearTimeout);timers=[]};
+function setImg(src){bg.style.opacity=0;later(()=>{bg.src=src;bg.style.opacity=1},150)}
+function prog(n){pill.textContent=n+' / 20'}
+function showScene(src,text,n,d,next){choice.classList.add('hidden');cap.classList.toggle('hidden',!text);if(text)cap.textContent=text;prog(n);setImg(src);later(next,d)}
+function ask(text,buttons,n,src){clear();cap.classList.add('hidden');choice.classList.remove('hidden');q.textContent=text;opts.innerHTML='';prog(n);if(src)setImg(src);buttons.forEach((b,i)=>{const el=document.createElement('button');el.className='btn '+(i===0?'primary':'secondary');el.textContent=b.label;el.onclick=b.fn;opts.appendChild(el)})}
+function end(title,text){ask(title,[{label:'Baştan Oyna',fn:()=>location.reload()}],20);const p=document.createElement('div');p.style.cssText='font-size:13px;opacity:.82;line-height:1.45;margin:-2px 0 12px';p.textContent=text;opts.prepend(p)}
+function startGame(){clear();start.classList.add('hidden');menuNote.classList.add('hidden');shade.classList.remove('hidden');topbar.classList.remove('hidden');bg.src=I[1];cap.classList.remove('hidden');cap.textContent='Eren ve Beyza yan yana, birbirlerinden habersiz şekilde dans ediyor…';prog(1);later(()=>ask('Yanında bir çocuk var. Sanırım sana bakıyor. Sen de ona bakmak ister misin?',[{label:'👀 Evet, yandaki çocuğa bak',fn:run1},{label:'Hayır, boş ver',fn:()=>end('Bu yol şimdilik burada bitiyor.','Ana hikâye diğer seçim üzerinden ilerliyor.')}],1,I[1]),3300)}
+function run1(){clear();showScene(I[2],'Bir anlığına göz göze geliyorsunuz…',2,2700,()=>showScene(I[3],'İkiniz de utanıp başka tarafa dönüyorsunuz…',3,2700,()=>showScene(I[4],'Beyza tuvalete giderken Eren onu arkadan hayranlıkla izliyor…',4,3000,()=>showScene(I[5],'O sırada kalabalığın içinde tatsız bir an yaşanıyor…',5,3300,()=>showScene(I[6],'Eren araya girip onları uzaklaştırıyor: “dağılın burdan”',6,3300,()=>showScene(I[7],'Beyza geri dönüyor ve Eren’in yanında konserin tadını çıkarmaya devam ediyor…',7,3300,()=>showScene(I[8],'Bu kez ikiniz de birbirinize bakıp gülümsüyorsunuz…',8,3300,()=>showScene(I[9],'Araya giren kızlar ortamı bozuyor… ama Eren’in gözü yine sadece Beyza’da.',9,3300,()=>showScene(I[10],'Beyza üzgün şekilde uzaklaşıyor… Eren de onun gidişini buruk gözlerle izliyor.',10,3600,()=>showScene(I[6],'İnsanlar halay çekmeye başlıyor… Eren, Beyza’ya elini uzatıyor.',11,2550,halayAsk))))))))))}
+function halayAsk(){ask('Eren seni halaya davet ediyor. Ne yapacaksın?',[{label:'Kabul et',fn:halayYes},{label:'Etme',fn:()=>end('Beyza daveti kabul etmedi.','Bu alternatif yol daha sonra devam edecek.')}],12,I[6])}
+function halayYes(){clear();showScene(I[7],'Kalabalık halayın içinde yan yana dans ediyorsunuz… ikiniz de mutlu, sevgi dolu ve utangaçsınız.',13,3600,()=>showScene(I[8],'Halay bitiyor… ikiniz de biraz uzaklaşıp arkadaşlarınızın yanına gidiyorsunuz.',14,3300,()=>showScene(I[9],'Beyza kendi kendine düşünüyor: “At şu adımı be adam!”',15,2700,()=>showScene(I[10],'Aranıza insanlar giriyor… Eren konserin tadını çıkarırken Beyza ona doğru bakıyor.',16,3300,finalAsk))))}
+function finalAsk(){ask('Şimdi ne yapalım?',[{label:'Yanına git ve ismini sor',fn:intro},{label:'Boşver be',fn:()=>end('Beyza geri durdu.','Bu alternatif kararın devamı daha sonra yazılacak.')}],17,I[10])}
+function intro(){clear();showScene(I[7],'Eren: “Eren, peki sen?”  Beyza: “Ben de Beyza. Peki kaç yaşındasın?”',18,3600,()=>showScene(I[8],'Eren: “25.”  Beyza: “Ben de 28.”',19,3600,ageAsk))}
+function ageAsk(){ask('Bu farkı problem etmeli misin?',[{label:'Hayır, ben ondan hoşlandım.',fn:()=>end('Beyza yaş farkını problem etmedi.','“Hayır, ben ondan hoşlandım.” yolu seçildi. Hikâye buradan devam edecek.')},{label:'Olmaz, yaşıt değiliz.',fn:()=>end('Beyza yaş farkını problem etti.','Bu alternatif yol daha sonra devam edecek.')}],20,I[9])}
+bg.src=I[0]; start.onclick=startGame;
+})();
+</script>
+</body></html>
