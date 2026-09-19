@@ -37,7 +37,7 @@ body {
   position:absolute; z-index:8; border:0; background:transparent; opacity:0;
   border-radius:999px; cursor:pointer; touch-action:manipulation;
 }
-.hotspot.menu-visible{opacity:1;background:rgba(8,5,12,.56);border:1px solid rgba(243,213,159,.7);color:#f8e8ca;font-weight:800;display:grid;place-items:center;text-indent:0;}\n.hotspot:focus-visible {
+.hotspot:focus-visible {
   opacity:.12; outline:3px solid rgba(255,234,192,.95); outline-offset:2px;
   background:rgba(255,255,255,.08);
 }
@@ -112,15 +112,6 @@ body {
 }
 </style>
 
-<script>window.__BEYZA_ASSETS__=[];</script>
-<script src="assets/a0.js?v=6"></script>
-<script src="assets/a1.js?v=6"></script>
-<script src="assets/a2.js?v=6"></script>
-<script src="assets/a3.js?v=6"></script>
-<script src="assets/a4.js?v=6"></script>
-<script src="assets/a5.js?v=6"></script>
-<script src="assets/a6.js?v=6"></script>
-<script>const ASSETS=window.__BEYZA_ASSETS__;</script>
 </head>
 <body>
 <main id="app">
@@ -176,7 +167,29 @@ body {
 
 <script>
 (() => {
-  const IMAGES = {"menu":"assets/hq/menu.webp?v=8","dance":"assets/hq/dance.webp?v=8","glance":ASSETS[2],"blush":ASSETS[3],"wc_walk":ASSETS[4],"harassment":ASSETS[5],"push":ASSETS[6],"romantic_return":ASSETS[7],"mutual_smile":ASSETS[8],"jealous":ASSETS[9],"sad_leave":ASSETS[10],"halay_invite":ASSETS[11],"halay_question":ASSETS[12],"halay_together":ASSETS[13],"after_halay":ASSETS[14],"self_talk":ASSETS[15],"apart_people":ASSETS[16],"final_question":ASSETS[17],"intro_name_age":ASSETS[18],"age_reveal":ASSETS[19],"age_difference_question":ASSETS[20]};
+  const IMAGES = {
+    "menu":"assets/scenes/menu.webp?v=11",
+    "dance":"assets/scenes/dance.webp?v=11",
+    "glance":"assets/scenes/glance.webp?v=11",
+    "blush":"assets/scenes/blush.webp?v=11",
+    "wc_walk":"assets/scenes/wc_walk.webp?v=11",
+    "harassment":"assets/scenes/harassment.webp?v=11",
+    "push":"assets/scenes/push.webp?v=11",
+    "romantic_return":"assets/scenes/romantic_return.webp?v=11",
+    "mutual_smile":"assets/scenes/mutual_smile.webp?v=11",
+    "jealous":"assets/scenes/jealous.webp?v=11",
+    "sad_leave":"assets/scenes/sad_leave.webp?v=11",
+    "halay_invite":"assets/scenes/halay_invite.webp?v=11",
+    "halay_question":"assets/scenes/halay_question.webp?v=11",
+    "halay_together":"assets/scenes/halay_together.webp?v=11",
+    "after_halay":"assets/scenes/after_halay.webp?v=11",
+    "self_talk":"assets/scenes/self_talk.webp?v=11",
+    "apart_people":"assets/scenes/apart_people.webp?v=11",
+    "final_question":"assets/scenes/final_question.webp?v=11",
+    "intro_name_age":"assets/scenes/intro_name_age.webp?v=11",
+    "age_reveal":"assets/scenes/age_reveal.webp?v=11",
+    "age_difference_question":"assets/scenes/age_difference_question.webp?v=11"
+  };
   const PART1 = [{"key": "glance", "caption": "Bir anlığına göz göze geliyorsunuz…", "duration": 2700}, {"key": "blush", "caption": "İkiniz de utanıp başka tarafa dönüyorsunuz…", "duration": 2700}, {"key": "wc_walk", "caption": "Beyza tuvalete giderken Eren onu arkadan hayranlıkla izliyor…", "duration": 3000}, {"key": "harassment", "caption": "O sırada kalabalığın içinde tatsız bir an yaşanıyor…", "duration": 3300}, {"key": "push", "caption": "Eren araya girip onları uzaklaştırıyor: “dağılın burdan”", "duration": 3300}, {"key": "romantic_return", "caption": "Beyza geri dönüyor ve Eren’in yanında konserin tadını çıkarmaya devam ediyor…", "duration": 3300}, {"key": "mutual_smile", "caption": "Bu kez ikiniz de birbirinize bakıp gülümsüyorsunuz…", "duration": 3300}, {"key": "jealous", "caption": "Araya giren kızlar ortamı bozuyor… ama Eren’in gözü yine sadece Beyza’da.", "duration": 3300}, {"key": "sad_leave", "caption": "Beyza üzgün şekilde uzaklaşıyor… Eren de onun gidişini buruk gözlerle izliyor.", "duration": 3600}, {"key": "halay_invite", "caption": "İnsanlar halay çekmeye başlıyor… Eren, Beyza’ya elini uzatıyor.", "duration": 2550}];
   const PART2 = [{"key": "halay_together", "caption": "Kalabalık halayın içinde yan yana dans ediyorsunuz… ikiniz de mutlu, sevgi dolu ve utangaçsınız.", "duration": 3600}, {"key": "after_halay", "caption": "Halay bitiyor… ikiniz de biraz uzaklaşıp arkadaşlarınızın yanına gidiyorsunuz.", "duration": 3300}, {"key": "self_talk", "caption": "", "duration": 2700}, {"key": "apart_people", "caption": "Aranıza insanlar giriyor… Eren konserin tadını çıkarırken Beyza ona doğru bakıyor.", "duration": 3300}];
   const TOTAL_STEPS = 20;
@@ -204,7 +217,7 @@ body {
   const ageOkHotspot = document.getElementById('ageOkHotspot');
   const ageNoHotspot = document.getElementById('ageNoHotspot');
 
-  menuBg.src = IMAGES.menu; menuBg.onerror = () => { menuBg.removeAttribute('src'); menuView.style.background='linear-gradient(180deg,#2a1525 0%,#140b16 48%,#07050b 100%)'; };
+  menuBg.src = IMAGES.menu;
   sceneImg.src = IMAGES.dance;
 
   let timers = [];
