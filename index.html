@@ -126,10 +126,10 @@ body {
 <main id="app">
   <section id="menuView" class="view active" aria-label="Ana menü">
     <img id="menuBg" class="bg" src="" alt="BEYZA giriş ekranı">
-    <button id="newGame" class="hotspot menu-visible" type="button" aria-label="Yeni Oyun">Yeni Oyun</button>
-    <button id="continueBtn" class="hotspot menu-visible" type="button" aria-label="Devam Et">Devam Et</button>
-    <button id="chaptersBtn" class="hotspot menu-visible" type="button" aria-label="Bölümler">Bölümler</button>
-    <button id="memoriesBtn" class="hotspot menu-visible" type="button" aria-label="Anılar">Anılar</button>
+    <button id="newGame" class="hotspot" type="button" aria-label="Yeni Oyun"></button>
+    <button id="continueBtn" class="hotspot" type="button" aria-label="Devam Et"></button>
+    <button id="chaptersBtn" class="hotspot" type="button" aria-label="Bölümler"></button>
+    <button id="memoriesBtn" class="hotspot" type="button" aria-label="Anılar"></button>
     <div id="menuHint" class="hint" aria-live="polite"></div>
   </section>
 
@@ -176,7 +176,7 @@ body {
 
 <script>
 (() => {
-  const IMAGES = {"menu":ASSETS[0],"dance":ASSETS[1],"glance":ASSETS[2],"blush":ASSETS[3],"wc_walk":ASSETS[4],"harassment":ASSETS[5],"push":ASSETS[6],"romantic_return":ASSETS[7],"mutual_smile":ASSETS[8],"jealous":ASSETS[9],"sad_leave":ASSETS[10],"halay_invite":ASSETS[11],"halay_question":ASSETS[12],"halay_together":ASSETS[13],"after_halay":ASSETS[14],"self_talk":ASSETS[15],"apart_people":ASSETS[16],"final_question":ASSETS[17],"intro_name_age":ASSETS[18],"age_reveal":ASSETS[19],"age_difference_question":ASSETS[20]};
+  const IMAGES = {"menu":"assets/hq/menu.webp?v=8","dance":"assets/hq/dance.webp?v=8","glance":ASSETS[2],"blush":ASSETS[3],"wc_walk":ASSETS[4],"harassment":ASSETS[5],"push":ASSETS[6],"romantic_return":ASSETS[7],"mutual_smile":ASSETS[8],"jealous":ASSETS[9],"sad_leave":ASSETS[10],"halay_invite":ASSETS[11],"halay_question":ASSETS[12],"halay_together":ASSETS[13],"after_halay":ASSETS[14],"self_talk":ASSETS[15],"apart_people":ASSETS[16],"final_question":ASSETS[17],"intro_name_age":ASSETS[18],"age_reveal":ASSETS[19],"age_difference_question":ASSETS[20]};
   const PART1 = [{"key": "glance", "caption": "Bir anlığına göz göze geliyorsunuz…", "duration": 2700}, {"key": "blush", "caption": "İkiniz de utanıp başka tarafa dönüyorsunuz…", "duration": 2700}, {"key": "wc_walk", "caption": "Beyza tuvalete giderken Eren onu arkadan hayranlıkla izliyor…", "duration": 3000}, {"key": "harassment", "caption": "O sırada kalabalığın içinde tatsız bir an yaşanıyor…", "duration": 3300}, {"key": "push", "caption": "Eren araya girip onları uzaklaştırıyor: “dağılın burdan”", "duration": 3300}, {"key": "romantic_return", "caption": "Beyza geri dönüyor ve Eren’in yanında konserin tadını çıkarmaya devam ediyor…", "duration": 3300}, {"key": "mutual_smile", "caption": "Bu kez ikiniz de birbirinize bakıp gülümsüyorsunuz…", "duration": 3300}, {"key": "jealous", "caption": "Araya giren kızlar ortamı bozuyor… ama Eren’in gözü yine sadece Beyza’da.", "duration": 3300}, {"key": "sad_leave", "caption": "Beyza üzgün şekilde uzaklaşıyor… Eren de onun gidişini buruk gözlerle izliyor.", "duration": 3600}, {"key": "halay_invite", "caption": "İnsanlar halay çekmeye başlıyor… Eren, Beyza’ya elini uzatıyor.", "duration": 2550}];
   const PART2 = [{"key": "halay_together", "caption": "Kalabalık halayın içinde yan yana dans ediyorsunuz… ikiniz de mutlu, sevgi dolu ve utangaçsınız.", "duration": 3600}, {"key": "after_halay", "caption": "Halay bitiyor… ikiniz de biraz uzaklaşıp arkadaşlarınızın yanına gidiyorsunuz.", "duration": 3300}, {"key": "self_talk", "caption": "", "duration": 2700}, {"key": "apart_people", "caption": "Aranıza insanlar giriyor… Eren konserin tadını çıkarırken Beyza ona doğru bakıyor.", "duration": 3300}];
   const TOTAL_STEPS = 20;
