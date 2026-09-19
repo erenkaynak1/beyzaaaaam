@@ -3,99 +3,179 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>BEYZA</title>
+<meta name="theme-color" content="#08050d">
+<title>BEYZA • İlk Karşılaşma</title>
 <style>
-:root{--gold:#e7b66d;--panel:rgba(10,7,14,.86);--border:rgba(255,255,255,.16)}
-*{box-sizing:border-box}html,body{margin:0;height:100%;background:#050309;color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
-#app{position:relative;width:min(100vw,430px);height:100dvh;min-height:650px;margin:auto;overflow:hidden;background:#000}
-.screen{position:absolute;inset:0;display:none}.screen.active{display:block}
-.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .35s ease}
-.shade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05) 50%,rgba(0,0,0,.72) 100%);pointer-events:none}
-.hot{position:absolute;border:0;background:transparent;opacity:0;z-index:8}
-#startHot{left:20%;top:59%;width:60%;height:9%;border-radius:40px}
-.top{position:absolute;z-index:6;top:max(14px,env(safe-area-inset-top));left:14px;right:14px;display:flex;justify-content:space-between;gap:10px;text-shadow:0 2px 10px #000}
-.top small{display:block;opacity:.78;letter-spacing:.08em}.top b{font-size:12px}.count{font-size:11px;padding:7px 10px;border-radius:999px;background:rgba(0,0,0,.45);border:1px solid var(--border)}
-.caption{position:absolute;z-index:6;left:14px;right:14px;bottom:max(16px,env(safe-area-inset-bottom));padding:14px 15px;border-radius:18px;background:rgba(0,0,0,.62);border:1px solid var(--border);backdrop-filter:blur(10px);line-height:1.45;font-size:14px}
-.choice{position:absolute;z-index:10;left:14px;right:14px;bottom:max(14px,env(safe-area-inset-bottom));padding:17px;border-radius:22px;background:var(--panel);border:1px solid var(--border);backdrop-filter:blur(14px);box-shadow:0 16px 50px rgba(0,0,0,.45)}
-.choice h2{font-size:18px;line-height:1.35;margin:0 0 13px}.btns{display:grid;gap:10px}
-.btn{border:1px solid var(--border);border-radius:15px;min-height:52px;padding:11px 13px;font:inherit;font-weight:750}
-.primary{background:linear-gradient(135deg,#f1d59e,#c98c4d);color:#26180d}.secondary{background:rgba(255,255,255,.08);color:#fff}
-.hidden{display:none!important}.end h2{font-family:Georgia,serif}.end p{opacity:.82;line-height:1.5;font-size:13px}
+:root{
+  --gold:#e6b96a; --gold2:#ffd996; --ink:#08050d; --glass:rgba(10,7,12,.72);
+  --line:rgba(238,196,120,.72); --muted:#d8d1c8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;background:#08050d;color:#fff;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow:hidden}
+button{font:inherit}
+#app{position:fixed;inset:0;background:#08050d;display:grid;place-items:center}
+.phone{position:relative;width:min(100vw,560px);height:100dvh;overflow:hidden;background:#100b13}
+.bg{position:absolute;inset:0;background:#17101f center/cover no-repeat;transform:scale(1.02);transition:opacity .65s ease,transform 5s ease;opacity:1}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,3,8,.28),rgba(5,3,8,.08) 42%,rgba(5,3,8,.62) 100%)}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.12;background-image:radial-gradient(rgba(255,255,255,.18) .7px,transparent .7px);background-size:4px 4px;mix-blend-mode:soft-light}
+.topbar{position:absolute;left:0;right:0;top:0;padding:calc(env(safe-area-inset-top) + 18px) 18px 0;display:flex;justify-content:space-between;gap:18px;z-index:5;text-shadow:0 2px 10px rgba(0,0,0,.8)}
+.chapter{font-size:13px;letter-spacing:.12em;text-transform:uppercase;line-height:1.4}
+.chapter b{display:block;font-size:14px;color:var(--gold2);letter-spacing:.08em}
+.progress{min-width:62px;height:34px;padding:0 12px;border:1px solid var(--line);border-radius:999px;background:rgba(8,5,13,.55);display:grid;place-items:center;font-weight:700;color:#f8e4bd}
+.story{position:absolute;left:14px;right:14px;bottom:calc(env(safe-area-inset-bottom) + 20px);z-index:6;display:flex;flex-direction:column;gap:10px}
+.card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(15,10,17,.8),rgba(8,6,10,.82));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px;box-shadow:0 12px 45px rgba(0,0,0,.32);padding:18px}
+.speaker{font-family:Georgia,serif;color:var(--gold2);font-weight:700;font-size:18px;margin-bottom:6px}
+.text{font-family:Georgia,serif;font-size:21px;line-height:1.35;text-wrap:balance}
+.note{font-size:14px;line-height:1.45;color:#ece5dc;margin-top:9px;opacity:.88}
+.question{font-family:Georgia,serif;font-weight:700;font-size:22px;text-align:center;color:#fff6e6;margin-bottom:13px}
+.choices{display:grid;gap:10px}
+.choice{width:100%;border:1px solid var(--line);background:rgba(18,14,18,.86);color:#fff;padding:15px 16px;border-radius:17px;font-weight:700;font-size:16px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);transition:.18s ease}
+.choice.primary{background:linear-gradient(180deg,#ddb16d,#a86e29);color:#1d1207;border-color:#ffd99e}
+.choice:active{transform:scale(.985)}
+.center{position:absolute;inset:0;display:grid;place-items:center;padding:24px;z-index:8;background:linear-gradient(180deg,rgba(8,5,13,.28),rgba(8,5,13,.56))}
+.menu{width:min(90%,420px);text-align:center}
+.logo{font-family:Georgia,serif;font-size:52px;letter-spacing:.14em;margin:0 0 8px;color:#fff1d5;text-shadow:0 0 26px rgba(230,185,106,.3)}
+.subtitle{color:#e4d7c8;opacity:.9;margin-bottom:28px}
+.start{width:100%;padding:17px;border-radius:18px;border:1px solid #f0c77e;background:linear-gradient(180deg,#e2b86d,#a56b27);font-weight:900;font-size:18px;color:#1a1006}
+.date{margin-top:14px;font-size:13px;color:#d7c6ae}
+.fade{animation:fade .5s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hidden{display:none!important}
+.toast{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:7;border:1px solid rgba(255,220,155,.45);background:rgba(6,4,8,.58);backdrop-filter:blur(8px);padding:10px 14px;border-radius:14px;color:#f7e6c7;font-family:Georgia,serif;font-style:italic;text-align:center;max-width:78%;opacity:0;transition:.25s}
+.toast.show{opacity:1}
+@media (min-width:561px){.phone{height:min(100dvh,980px);border-radius:28px;box-shadow:0 24px 80px rgba(0,0,0,.5)}}
 </style>
 </head>
 <body>
 <div id="app">
-  <section id="menu" class="screen active">
-    <img id="menuImg" class="bg" alt="BEYZA">
-    <button id="startHot" class="hot" aria-label="Yeni Oyun"></button>
-  </section>
-  <section id="story" class="screen">
-    <img id="scene" class="bg" alt="">
-    <div class="shade"></div>
-    <div class="top"><div><small>BÖLÜM 1 · 12 EYLÜL 2026</small><b>JW Marriott Ankara · Arem Arman</b></div><div id="count" class="count">1 / 20</div></div>
-    <div id="caption" class="caption"></div>
-    <div id="choice" class="choice hidden"><h2 id="q"></h2><div id="btns" class="btns"></div></div>
-    <div id="end" class="choice end hidden"><h2 id="endTitle"></h2><p id="endText"></p><div class="btns"><button id="restart" class="btn primary">Baştan Oyna</button></div></div>
-  </section>
+  <main class="phone">
+    <div id="bg" class="bg"></div>
+    <div class="grain"></div>
+    <div id="topbar" class="topbar hidden">
+      <div class="chapter"><b>Bölüm 1</b>İlk Karşılaşma</div>
+      <div id="progress" class="progress">1 / 20</div>
+    </div>
+    <div id="toast" class="toast"></div>
+    <section id="story" class="story hidden"></section>
+    <section id="menu" class="center">
+      <div class="menu fade">
+        <h1 class="logo">BEYZA</h1>
+        <div class="subtitle">Bazı geceler sadece bir konser değildir.</div>
+        <button id="start" class="start">Hikâyeyi Başlat</button>
+        <div class="date">12 Eylül 2026 • Ankara</div>
+      </div>
+    </section>
+  </main>
 </div>
-<script src="assets/00.js"></script>
-<script src="assets/01.js"></script>
-<script src="assets/02.js"></script>
-<script src="assets/03.js"></script>
-<script src="assets/04.js"></script>
-<script src="assets/05_06.js"></script>
+
+<script src="assets/a0.js"></script>
 <script>
 (()=>{
-const A=window.__BEYZA_ASSETS__||[];
-const menu=document.getElementById('menu'),story=document.getElementById('story'),menuImg=document.getElementById('menuImg'),scene=document.getElementById('scene'),caption=document.getElementById('caption'),choice=document.getElementById('choice'),q=document.getElementById('q'),btns=document.getElementById('btns'),count=document.getElementById('count'),end=document.getElementById('end'),endTitle=document.getElementById('endTitle'),endText=document.getElementById('endText');
-menuImg.src=A[0]||A[1]||''; scene.src=A[1]||A[0]||'';
-let timers=[];
-const clear=()=>{timers.forEach(clearTimeout);timers=[]};
-const later=(fn,ms)=>{const t=setTimeout(fn,ms);timers.push(t)};
-const img=i=>A[i]||A[1]||A[0]||'';
-function setScene(i,text,n){scene.style.opacity=0;later(()=>{scene.src=img(i);scene.style.opacity=1;caption.textContent=text;caption.classList.remove('hidden');count.textContent=n+' / 20'},160)}
-function ask(text,opts){clear();caption.classList.add('hidden');choice.classList.remove('hidden');q.textContent=text;btns.innerHTML='';opts.forEach((o,j)=>{const b=document.createElement('button');b.className='btn '+(j===0?'primary':'secondary');b.textContent=o.label;b.onclick=o.go;btns.appendChild(b)})}
-function finish(title,text){clear();choice.classList.add('hidden');caption.classList.add('hidden');end.classList.remove('hidden');endTitle.textContent=title;endText.textContent=text}
-const p1=[
-[2,'Bir anlığına göz göze geliyorsunuz…',2,2700],
-[3,'İkiniz de utanıp başka tarafa dönüyorsunuz…',3,2700],
-[4,'Beyza tuvalete giderken Eren onu arkadan hayranlıkla izliyor…',4,3000],
-[4,'Kalabalığın içinde iki kişi ön taraftaki kızları rahatsız ediyor.',5,3300],
-[4,'Eren araya giriyor: “Dağılın burdan.”',6,3300],
-[2,'Beyza geri geliyor. Eren’in gözü hâlâ onda.',7,3300],
-[2,'Bu kez ikiniz de birbirinize bakıp gülümsüyorsunuz.',8,3300],
-[3,'Araya giren kızlara rağmen Eren sadece Beyza’ya bakıyor.',9,3300],
-[3,'Beyza üzgünce uzaklaşıyor. Eren onun gidişini izliyor.',10,3600],
-[5,'İnsanlar halay çekmeye başlıyor. Eren elini Beyza’ya uzatıyor.',11,2550]
+"use strict";
+const A = window.__BEYZA_ASSETS__ || [];
+const bg = document.getElementById("bg");
+const story = document.getElementById("story");
+const menu = document.getElementById("menu");
+const topbar = document.getElementById("topbar");
+const progress = document.getElementById("progress");
+const toast = document.getElementById("toast");
+let timer = null;
+let index = 0;
+
+const fallback = [
+  "radial-gradient(circle at 50% 20%,#5b331c 0,#201120 40%,#08050d 100%)",
+  "radial-gradient(circle at 70% 30%,#68411f 0,#231124 44%,#08050d 100%)",
+  "radial-gradient(circle at 35% 22%,#5e2c25 0,#19101f 45%,#08050d 100%)"
 ];
-const p2=[
-[5,'Kalabalık halayın içinde yan yana dans ediyorsunuz. İkiniz de keyifli, sevgi dolu ve utangaçsınız.',13,3600],
-[5,'Halay bitiyor. Biraz uzaklaşıp arkadaşlarınızın yanına gidiyorsunuz.',14,3300],
-[3,'Beyza kendi kendine: “At şu adımı be adam!”',15,2700],
-[2,'Aranıza insanlar giriyor. Eren konserin tadını çıkarırken Beyza ona bakıyor.',16,3300]
+
+function art(i){
+  if(A[i] && /^data:image\//.test(A[i])) return "url('"+A[i]+"')";
+  return fallback[i % fallback.length];
+}
+function setBg(i){
+  bg.style.opacity="0";
+  setTimeout(()=>{
+    bg.style.backgroundImage=art(i%3);
+    bg.style.transform="scale(1.04)";
+    bg.style.opacity="1";
+    setTimeout(()=>bg.style.transform="scale(1.0)",30);
+  },180);
+}
+function setProgress(n){ progress.textContent=n+" / 20"; }
+function clear(){ if(timer){clearTimeout(timer);timer=null;} }
+function showToast(t){
+  toast.textContent=t; toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),1600);
+}
+function renderCard({speaker,text,note,question,choices}){
+  story.innerHTML="";
+  const card=document.createElement("div");
+  card.className="card fade";
+  if(speaker){const s=document.createElement("div");s.className="speaker";s.textContent=speaker;card.appendChild(s);}
+  if(text){const x=document.createElement("div");x.className="text";x.textContent=text;card.appendChild(x);}
+  if(note){const n=document.createElement("div");n.className="note";n.textContent=note;card.appendChild(n);}
+  if(question){const q=document.createElement("div");q.className="question";q.textContent=question;card.appendChild(q);}
+  if(choices){
+    const box=document.createElement("div");box.className="choices";
+    choices.forEach((c,j)=>{
+      const b=document.createElement("button");
+      b.className="choice"+(j===0?" primary":"");
+      b.textContent=c.label;
+      b.onclick=c.action;
+      box.appendChild(b);
+    });
+    card.appendChild(box);
+  }
+  story.appendChild(card);
+}
+function auto(ms,fn){ clear(); timer=setTimeout(fn,ms); }
+
+const scenes = [
+ ()=>{setProgress(1);setBg(0);renderCard({text:"Aynı ritimde, aynı gecede…",note:"JW Marriott Ankara rooftop • Arem Arman"});auto(3300,scenes[1]);},
+ ()=>{setProgress(2);renderCard({question:"Yanında bir tane çocuk var. Sanırım sana bakıyor. Sen de ona bakmak ister misin?",choices:[
+   {label:"Evet, yandaki çocuğa bak",action:()=>go(2)},
+   {label:"Hayır, boş ver",action:()=>ending("Bazen bir hikâye, tek bir bakışla başlamaz.","Belki başka bir gecede.")}
+ ]});},
+ ()=>{setProgress(3);setBg(1);renderCard({text:"Göz göze geldiniz.",note:"Kısacık bir bakış. İkiniz de ne olduğunu tam anlayamadan…"});auto(2700,()=>go(3));},
+ ()=>{setProgress(4);renderCard({text:"İkiniz de başınızı çevirdiniz.",note:"Utangaçlık, insan türünün hâlâ güncellenmeyen en eski özelliği."});auto(2700,()=>go(4));},
+ ()=>{setProgress(5);setBg(2);renderCard({text:"Beyza tuvalete doğru yürüdü.",note:"Eren onun ardından baktı."});auto(3000,()=>go(5));},
+ ()=>{setProgress(6);renderCard({text:"Kalabalıkta iki adam, iki kızı rahatsız etmeye başladı.",note:"Eren'in gözü Beyza'da olduğu için kızların yüzüne hiç bakmadı."});auto(3000,()=>go(6));},
+ ()=>{setProgress(7);renderCard({speaker:"Eren",text:"Dağılın burdan.",note:"Adamları uzaklaştırdı."});auto(2700,()=>go(7));},
+ ()=>{setProgress(8);setBg(0);renderCard({text:"Beyza geri döndü.",note:"Konserin tadını çıkarırken Eren onu fark ettirmeden izliyordu."});auto(3000,()=>go(8));},
+ ()=>{setProgress(9);renderCard({text:"Beyza da Eren'e baktı.",note:"Bu kez ikisi de gülümsedi."});auto(3000,()=>go(9));},
+ ()=>{setProgress(10);setBg(1);renderCard({text:"İki kız Eren ile Beyza'nın arasına girdi.",note:"Beyza içinden: “Bu kızların saçını başını yolacağım.” Eren ise onlara bakmadı bile."});auto(3300,()=>go(10));},
+ ()=>{setProgress(11);renderCard({text:"Beyza üzgünce uzaklaştı.",note:"Eren onun gidişini izledi. Beyza Eren'den vazgeçti gibi…"});auto(3300,()=>go(11));},
+ ()=>{setProgress(12);setBg(2);renderCard({text:"Kalabalık halaya durdu.",note:"Eren, Beyza'ya baktı ve elini uzattı."});auto(2400,()=>go(12));},
+ ()=>{setProgress(13);renderCard({question:"Eren seni halaya davet ediyor.",choices:[
+   {label:"Kabul et",action:()=>go(13)},
+   {label:"Etme",action:()=>ending("Beyza daveti kabul etmedi.","Eren bir süre daha kalabalığın içinde onu aradı.")}
+ ]});},
+ ()=>{setProgress(14);setBg(0);renderCard({text:"Yan yana halay çektiniz.",note:"İkiniz de mutlu, biraz da utangaçtınız."});auto(3000,()=>go(14));},
+ ()=>{setProgress(15);renderCard({text:"Halay bitti. Yeniden kendi arkadaş gruplarınıza döndünüz.",note:"Ama bakışlar hâlâ aynı yerdeydi."});auto(3000,()=>go(15));},
+ ()=>{setProgress(16);setBg(1);renderCard({text:"“At şu adımı be adam!”",note:"Beyza'nın aklından geçen tam olarak buydu."});auto(3000,()=>go(16));},
+ ()=>{setProgress(17);renderCard({question:"Şimdi ne yapalım?",choices:[
+   {label:"Yanına git ve ismini sor",action:()=>go(17)},
+   {label:"Boşver be",action:()=>ending("Beyza yanına gitmedi.","O gece belki burada biterdi.")}
+ ]});},
+ ()=>{setProgress(18);setBg(2);renderCard({speaker:"Eren",text:"Eren… peki sen?",note:"Beyza: “Ben de Beyza. Peki kaç yaşındasın?”"});auto(3600,()=>go(18));},
+ ()=>{setProgress(19);renderCard({speaker:"Eren",text:"25.",note:"Beyza: “Ben de 28.”"});auto(3600,()=>go(19));},
+ ()=>{setProgress(20);setBg(0);renderCard({question:"Bu farkı problem etmeli misin?",choices:[
+   {label:"Hayır, ben ondan hoşlandım.",action:()=>ending("Beyza yaş farkını problem etmedi.","Hikâye burada bitmiyor. Asıl mesele şimdi başlıyor. ❤")},
+   {label:"Olmaz, yaşıt değiliz.",action:()=>ending("Beyza yaş farkını problem etti.","Bu seçim farklı bir yola açılıyor.")}
+ ]});}
 ];
-function play(list,done){clear();choice.classList.add('hidden');let k=0;const next=()=>{if(k>=list.length)return done();const x=list[k++];setScene(x[0],x[1],x[2]);later(next,x[3])};next()}
-function firstQuestion(){ask('Yanında bir çocuk var. Sanırım sana bakıyor. Sen de ona bakmak ister misin?',[
-{label:'👀 Evet, yandaki çocuğa bak',go:()=>play(p1,halayQuestion)},
-{label:'Hayır, boş ver',go:()=>finish('Beyza boş verdi.','Bu alternatif hikâye yolunu daha sonra genişleteceğiz.')}
-])}
-function halayQuestion(){count.textContent='12 / 20';scene.src=img(5);ask('Eren seni halaya davet ediyor.',[
-{label:'Kabul et',go:()=>play(p2,nameQuestion)},
-{label:'Etme',go:()=>finish('Beyza daveti kabul etmedi.','Bu alternatif yol daha sonra devam edecek.')}
-])}
-function nameQuestion(){count.textContent='17 / 20';scene.src=img(2);ask('Şimdi ne yapalım?',[
-{label:'Yanına git ve ismini sor',go:introAge},
-{label:'Boşver be',go:()=>finish('Beyza geri durdu.','Bu alternatif yol daha sonra devam edecek.')}
-])}
-function introAge(){choice.classList.add('hidden');setScene(6,'Eren: “Eren, peki sen?”  Beyza: “Ben de Beyza. Peki kaç yaşındasın?”',18);later(ageReveal,3600)}
-function ageReveal(){setScene(6,'Eren: “25.”  Beyza yüzünü biraz ekşiterek: “Ben de 28.”',19);later(ageQuestion,3600)}
-function ageQuestion(){count.textContent='20 / 20';scene.src=img(6);ask('Bu farkı problem etmeli misin?',[
-{label:'Hayır, ben ondan hoşlandım.',go:()=>finish('Beyza yaş farkını problem etmedi.','“Hayır, ben ondan hoşlandım.” yolu seçildi. Hikâye buradan devam edecek.')},
-{label:'Olmaz, yaşıt değiliz.',go:()=>finish('Beyza yaş farkını problem etti.','“Olmaz, yaşıt değiliz.” yolu ayrı bir dal olarak devam edecek.')}
-])}
-function start(){clear();end.classList.add('hidden');choice.classList.add('hidden');menu.classList.remove('active');story.classList.add('active');scene.src=img(1);caption.textContent='Eren ve Beyza yan yana, birbirlerinden habersiz şekilde dans ediyor…';caption.classList.remove('hidden');count.textContent='1 / 20';later(firstQuestion,3300)}
-document.getElementById('startHot').onclick=start;
-document.getElementById('restart').onclick=()=>{clear();story.classList.remove('active');menu.classList.add('active')};
+
+function go(i){clear();index=i;scenes[i]();}
+function ending(title,sub){
+  clear();setBg((index+1)%3);setProgress(20);
+  renderCard({text:title,note:sub,choices:[{label:"Başa dön",action:restart}]});
+}
+function restart(){clear();story.classList.add("hidden");topbar.classList.add("hidden");menu.classList.remove("hidden");setBg(0);}
+document.getElementById("start").onclick=()=>{
+  menu.classList.add("hidden");story.classList.remove("hidden");topbar.classList.remove("hidden");go(0);
+};
+setBg(0);
 })();
 </script>
-</body></html>
+</body>
+</html>
