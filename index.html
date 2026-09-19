@@ -26,7 +26,7 @@ body {
 }
 .view { position:absolute; inset:0; display:none; }
 .view.active { display:block; }
-.bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; image-rendering:auto; -webkit-transform:translateZ(0); transform:translateZ(0); }
 .fade { transition:opacity .38s ease; }
 .shade {
   position:absolute; inset:0;
@@ -112,7 +112,7 @@ body {
 }
 </style>
 
-<script>window.__BEYZA_ASSETS__=[];</script>
+<script>window.__BEYZA_ASSETS__=[];</script>\n<script src="assets/menu_hq.js?v=1"></script>
 <script src="assets/a0.js?v=6"></script>
 <script src="assets/a1.js?v=6"></script>
 <script src="assets/a2.js?v=6"></script>
@@ -204,7 +204,7 @@ body {
   const ageOkHotspot = document.getElementById('ageOkHotspot');
   const ageNoHotspot = document.getElementById('ageNoHotspot');
 
-  menuBg.src = IMAGES.menu;
+  menuBg.src = window.__BEYZA_MENU_HQ__ || IMAGES.menu;
   sceneImg.src = IMAGES.dance;
 
   let timers = [];
